@@ -22,11 +22,6 @@ class DirectedGraph:
     def _add_nodes(self, nodes: set[int]):
         for node in nodes:
             self._add_node(node)
-            if node not in self.predecessors_of:
-                self.predecessors_of[node] = set()
-
-            if node not in self.successors_of:
-                self.successors_of[node] = set()
 
     def _add_edges(self, edges: set[tuple[[int, int], int]]):
         for edge in edges:
@@ -34,6 +29,11 @@ class DirectedGraph:
 
     def _add_node(self, node: int):
         self.nodes.add(node)
+        if node not in self.predecessors_of:
+            self.predecessors_of[node] = set()
+
+        if node not in self.successors_of:
+            self.successors_of[node] = set()
 
     def _add_edge(self, edge: tuple[[int, int], int]):
         self.weighted_edges.add(edge)
