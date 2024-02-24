@@ -16,7 +16,7 @@ class TestGraphUtils(TestCase):
     def test_graph_with_non_positive_weights(self):
         edges = {
             ((1, 2), 1),
-            ((1, 3), -2)
+            ((1, 3), -3)
         }
         graph = DirectedGraph.build_from_edges(edges)
 
