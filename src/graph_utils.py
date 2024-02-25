@@ -8,6 +8,7 @@ def has_positive_weights(graph: DirectedGraph):
 
     return True
 
+
 def depth_first_search(graph: DirectedGraph, root: int) -> list[int]:
     visited_nodes_list = []
     visited_nodes_set = set()
@@ -21,6 +22,5 @@ def _depth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: lis
     visited_nodes_set.add(node)
 
     successors = graph.successors_of[node]
-    for suc in successors:
-        if suc not in visited_nodes_set:
-            _depth_first_search(graph, suc, visited_nodes_list)
+    unvisited_successors = filter(lambda n: n not in visited_nodes_set, successors)
+    [_depth_first_search(graph, n, visited_nodes_list, visited_nodes_set) for n in unvisited_successors]
