@@ -12,19 +12,19 @@ def has_positive_weights(graph: DirectedGraph):
 def depth_first_search(graph: DirectedGraph, root: int) -> list[int]:
     visited_nodes_list = [root]
     visited_nodes_set = {root}
-    _depth_first_search(graph, root, visited_nodes_list, visited_nodes_set)
+    __depth_first_search(graph, root, visited_nodes_list, visited_nodes_set)
 
     return visited_nodes_list
 
 
-def _depth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: list[int], visited_nodes_set: set[int]):
+def __depth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: list[int], visited_nodes_set: set[int]):
     successors = graph.successors_of[node]
     unvisited_successors = filter(lambda n: n not in visited_nodes_set, successors)
     [
         (
             visited_nodes_list.append(suc),
             visited_nodes_set.add(suc),
-            _depth_first_search(graph, suc, visited_nodes_list, visited_nodes_set)
+            __depth_first_search(graph, suc, visited_nodes_list, visited_nodes_set)
         )
         for suc in unvisited_successors
     ]
@@ -33,13 +33,13 @@ def _depth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: lis
 def breadth_first_search(graph: DirectedGraph, root: int) -> list[int]:
     visited_nodes_list = [root]
     visited_nodes_set = {root}
-    _breadth_first_search(graph, root, visited_nodes_list, visited_nodes_set)
+    __breadth_first_search(graph, root, visited_nodes_list, visited_nodes_set)
 
     return visited_nodes_list
 
 
-def _breadth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: list[int], visited_nodes_set: set[int]):
+def __breadth_first_search(graph: DirectedGraph, node: int, visited_nodes_list: list[int], visited_nodes_set: set[int]):
     successors = graph.successors_of[node]
     unvisited_successors = [n for n in successors if n not in visited_nodes_set]
     [(visited_nodes_list.append(suc), visited_nodes_set.add(suc)) for suc in unvisited_successors]
-    [_breadth_first_search(graph, suc, visited_nodes_list, visited_nodes_set) for suc in unvisited_successors]
+    [__breadth_first_search(graph, suc, visited_nodes_list, visited_nodes_set) for suc in unvisited_successors]
